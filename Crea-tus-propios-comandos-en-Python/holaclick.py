@@ -6,7 +6,13 @@ import click
 @click.command()
 @click.argument("tunombre")
 def hola(tunombre):
-    """ Script que hace el holaclick.py TUNOMBRE """
+    """
+    Escribe el mensaje:
+
+        Hola TUNOMBRE desde click!
+
+    y además verifica que el usuario proporcione opciones válidas.
+    """
     print("Hola {} desde click!".format(tunombre))
 
 
