@@ -26,7 +26,7 @@ def genpass(len, n):
 
         faltan = random.choices(minusculas+mayusculas+digitos, k=k)
 
-        clave = clave.split() + faltan
+        clave = list(clave) + faltan
         random.shuffle(clave)
         clave = "".join(clave)
 

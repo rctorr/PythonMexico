@@ -36,7 +36,7 @@ def genpass(len, n, with_simb):
 
         faltan = random.choices(alfabeto, k=k)
 
-        clave = clave.split() + faltan
+        clave = list(clave) + faltan
         random.shuffle(clave)
         clave = "".join(clave)
 
