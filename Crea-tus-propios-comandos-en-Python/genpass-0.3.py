@@ -28,8 +28,11 @@ def genpass(len, n, with_simb):
         k = len - 3
 
         alfabeto = minusculas+mayusculas+digitos
+
         if with_simb:
+            clave += random.choice(simbolos)
             alfabeto += simbolos
+            k -= 1
 
         faltan = random.choices(alfabeto, k=k)
 
