@@ -28,12 +28,15 @@ def genpass(len, n, with_simb):
         k = len - 3
 
         alfabeto = minusculas+mayusculas+digitos
+
         if with_simb:
+            clave += random.choice(simbolos)
             alfabeto += simbolos
+            k -= 1
 
         faltan = random.choices(alfabeto, k=k)
 
-        clave = clave.split() + faltan
+        clave = list(clave) + faltan
         random.shuffle(clave)
         clave = "".join(clave)
 
