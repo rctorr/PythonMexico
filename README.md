@@ -1,7 +1,7 @@
 # Introducción a Python creando scripts con $ Click_ #
 
-| Taller impartido por: ||
-| ----- ||
+| Taller impartido por: | |
+| ----- | |
 | **Tallerista** | **Perla Godinez** |
 | Twitter | @Perla_GCastillo |
 | Telegram | Perla Castillo |
