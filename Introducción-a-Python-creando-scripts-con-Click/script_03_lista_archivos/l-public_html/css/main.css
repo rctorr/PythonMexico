@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Quicksand');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    text-align: center;
+    font-family: Montserrat, sans-serif;
+}
+
+h2 {
+    background-color: #333;
+    color: #eee;
+    font-family: Quicksand, sans-serif;
+    margin: 0;
+    padding: 16px 0;
+    box-shadow: 0 2px 4px #000;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+}
+
+hr {
+    margin: 16px 0;
+}
+
+table {
+    margin: 16px auto;
+}
+
+th {
+    background-color: #26004d;
+    color: #fff;
+    padding: 6px 13px;
+}
+
+td {
+    background-color: #f2e6ff;
+    padding: 3px 12px;
+}
+
+tr:nth-child(odd) td {
+    background-color: #d9b3ff;
+}
+
+td:nth-child(1) {
+    text-align: left;
+}
+
+td:nth-child(3) {
+    text-align: right;
+}
+
+tr:hover td {
+    color: orange;
+}

@@ -1,0 +1,2 @@
+Click==7.0
+pyexcel-xls==0.5.8
