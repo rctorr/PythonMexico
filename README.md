@@ -1,4 +1,4 @@
-![Logo](https://user-images.githubusercontent.com/3845886/48257999-bd694000-e3d9-11e8-8287-c70ed2639515.png)
+![Logo](python-mexico.png)
 
 # PythonMexico
 
