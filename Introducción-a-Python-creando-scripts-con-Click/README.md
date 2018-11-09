@@ -3,7 +3,7 @@
 | Impartido por | Twitter | Telegram | Github |
 | ------------- | ------- | -------- | ------ |
 | **Perla Godinez** | @Perla_GCastillo | Perla Castillo | @PerlaGCastillo |
-| **Jose Carlos Melgoza ** | @Jose_Carlos_Mz | Jose Carlos Melgoza | - |
+| **Jose Carlos Melgoza** | @Jose_Carlos_Mz | Jose Carlos Melgoza | - |
 | **Ricardo Torres** | @rctorr | @rctorr | @rctorr |
 
 
