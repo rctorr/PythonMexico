@@ -61,8 +61,8 @@ def juega_ia(tablero):
     """
     class P:
         def __init__(self, i, j):
-            self.i = i;
-            self.j = j;
+            self.i = i
+            self.j = j
             
         def es_esquina(self):
             """ Regresa True si la posición corresponde a una esquina """
@@ -72,8 +72,8 @@ def juega_ia(tablero):
 
     # Se buscan las casillas disponibles en orden aleatorio
     casillas = [P(i, j) for i in random.sample(range(3), 3)
-        for j in random.sample(range(3), 3)
-        if tablero[j][i] == 0]
+                for j in random.sample(range(3), 3)
+                if tablero[j][i] == 0]
         
     # Buscar si la IA gana, se terminó!
     for c in casillas:
@@ -140,7 +140,7 @@ def es_empate(tablero):
     """
     # Se buscan las casillas disponibles en orden aleatorio
     casillas = [(i, j) for i in range(3) for j in range(3)
-        if tablero[j][i] == 0]
+                if tablero[j][i] == 0]
     return False if casillas else True        
 
 def main():
