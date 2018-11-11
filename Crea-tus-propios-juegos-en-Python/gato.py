@@ -57,16 +57,59 @@ def juega_usuario(tablero):
 
 def juega_ia(tablero):
     """
-    Realiza el procedimiento de una jugada de ia
+    Realiza el procedimiento de una jugada de la IA
     """
-    jugada = False
+    class P:
+        def __init__(self, i, j):
+            self.i = i;
+            self.j = j;
+            
+        def es_esquina(self):
+            """ Regresa True si la posición corresponde a una esquina """
+            return self.i in [0, 2] and self.j in [0, 2]
+
     print("Juega IA")
-    while not jugada:
-        col = random.randrange(3)
-        ren = random.randrange(3)
-        if tablero[ren][col] == 0:
-            tablero[ren][col] = -1
-            jugada = True
+
+    # Se buscan las casillas disponibles en orden aleatorio
+    casillas = [P(i, j) for i in random.sample(range(3), 3)
+        for j in random.sample(range(3), 3)
+        if tablero[j][i] == 0]
+        
+    # Buscar si la IA gana, se terminó!
+    for c in casillas:
+        tablero_nuevo = [r[:] for r in tablero]
+        tablero_nuevo[c.j][c.i] = -1
+        if gana(tablero_nuevo, -1):
+            tablero[c.j][c.i] = -1
+            return
+
+    # Buscar si el humano gana, hay que bloquear
+    for c in casillas:
+        tablero_nuevo = [r[:] for r in tablero]
+        tablero_nuevo[c.j][c.i] = 1
+        if gana(tablero_nuevo, 1):
+            tablero[c.j][c.i] = -1
+            return
+
+    # Buscar tirar en las esquinas
+    esquinas = [c for c in casillas if c.es_esquina()]
+    if esquinas:
+        c = esquinas[0]
+        tablero[c.j][c.i] = -1
+        return
+
+    # Se busca tirar en el centro
+    if P(1, 1) in casillas:
+        tablero[1][1] = -1
+        return
+
+    # Se busca tirar en los lados
+    lados = [c for c in casillas if c.es_lado()]
+    if lados:
+        c = lados[0]
+        tablero[c.j][c.i] = -1
+        return
+
 
 def gana(tablero, n):
     """
@@ -90,6 +133,15 @@ def gana(tablero, n):
         return True
 
     return False
+
+def es_empate(tablero):
+    """
+    Regresa True si ya no hay casillas a donde tirar, False en caso contrario
+    """
+    # Se buscan las casillas disponibles en orden aleatorio
+    casillas = [(i, j) for i in range(3) for j in range(3)
+        if tablero[j][i] == 0]
+    return False if casillas else True        
 
 def main():
     """
@@ -127,6 +179,11 @@ def main():
                 print("-"*13)
                 print("La IA gana!")
                 print("-"*13)
+        if not fin and es_empate(tablero):
+            fin = True
+            print("-"*13)
+            print("Empate, nadie gana!")
+            print("-"*13)
 
     imprime(tablero, simb1, simb2)
 
