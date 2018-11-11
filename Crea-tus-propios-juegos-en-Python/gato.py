@@ -7,10 +7,10 @@ y un usuario inhumano.
 
 El juego consta de un tablero de 9 casillas
 
+  0 1 2
 0 * * *
 1 * * *
 2 * * *
-  0 1 2
 
 Para elegir una casilla se usa el sistema de coordenadas, donde la
 casilla (0, 0) es la de la esquina superior izquierda.
@@ -26,15 +26,16 @@ El usuario siempre inicia primero
 
 import random
 
-def imprime(tablero):
+def imprime(tablero, simb1, simb2):
     """
     Imprime el tablero en la salida estándar
     """
+    print("  0 1 2")
+    simbs = "_"+simb1+simb2
     for i, linea in enumerate(tablero):
-        linea = ["o" if c==1 else "x" if c==2 else "*" for c in linea]
+        linea = [simbs[c] for c in linea]
         linea = " ".join(linea)
         print(i, linea)
-    print("  0 1 2")
     print()
 
 def juega_usuario(tablero):
@@ -64,27 +65,28 @@ def juega_ia(tablero):
         col = random.randrange(3)
         ren = random.randrange(3)
         if tablero[ren][col] == 0:
-            tablero[ren][col] = 2
+            tablero[ren][col] = -1
             jugada = True
 
 def gana(tablero, n):
     """
     Regresa True si el jugador n ha ganado, False en caso contrario
     """
-    val = n * 3
+    # Busca gato en horizontales
     for ren in tablero:
-        ren = [c for c in ren if c == n]
-        if len(ren) == 3:
+        if abs(sum(ren)) == 3 and n in ren:
             return True
-    for i in range(3):
-        col = [ren[i] for ren in tablero if ren[i] == n]
-        if len(col) == 3:
+    # Busca gato en verticales
+    for col in zip(*tablero):
+        if abs(sum(col)) == 3 and n in col:
             return True
-    diag1 = [ren[i] for i, ren in enumerate(tablero) if ren[i] == n]
-    if len(diag1) == 3:
+    # Busca gato en diagonal 1
+    diag1 = [ren[i] for i, ren in enumerate(tablero)]
+    if abs(sum(diag1)) == 3 and n in diag1:
         return True
-    diag2 = [ren[2-i] for i, ren in enumerate(tablero) if ren[2-i] == n]
-    if len(diag2) == 3:
+    # Busca gato en diagonal 2
+    diag2 = [ren[2-i] for i, ren in enumerate(tablero)]
+    if abs(sum(diag2)) == 3 and n in diag2:
         return True
 
     return False
@@ -94,19 +96,21 @@ def main():
     Función principal del juego de gato
     """
     tablero = [
-        [0,0,0],
-        [0,0,0],
-        [0,0,0]
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0]
     ]
-    turno = 0 # 0 turno de usuario, 1 turno de ia
-    fin = False # Define cuando ha terminado el juego
+    turno = 0  # 0 turno de usuario, 1 turno de ia
+    fin = False  # Define cuando ha terminado el juego
+    simb1 = "o"  # Símbolo del jugador 1, de momento el usuario
+    simb2 = "x"  # Símbolo del jugador 2, de momento la IA
 
     print()
     print("Juego de Gato")
     print("-"*13)
 
     while not fin:
-        imprime(tablero)
+        imprime(tablero, simb1, simb2)
         if turno == 0:
             if juega_usuario(tablero):
                 turno = 1
@@ -118,14 +122,13 @@ def main():
         else:
             juega_ia(tablero)
             turno = 0
-            if gana(tablero, 2):
+            if gana(tablero, -1):
                 fin = True
                 print("-"*13)
                 print("La IA gana!")
                 print("-"*13)
 
-    imprime(tablero)
+    imprime(tablero, simb1, simb2)
 
 if __name__ == "__main__":
     main()
-
