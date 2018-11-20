@@ -8,127 +8,149 @@ y un usuario inhumano.
 El juego consta de un tablero de 9 casillas
 
   0 1 2
-0 * * *
-1 * * *
-2 * * *
+0 . . . 
+1 . . .
+2 . . .
 
 Para elegir una casilla se usa el sistema de coordenadas, donde la
 casilla (0, 0) es la de la esquina superior izquierda.
 
-El usuario siempre inicia primero
+Desarrollo
+
+El tablero en una lista de 3 listas de 3 elementos los valores posibles
+son los siguientes:
+    0 - Indica que la casilla está vacía y es el estado inicial
+    1 - Indica que es una casilla ocupada por una tirada del Humano
+   -1 - Indica que es una casilla ocupara por una tirada de la IA
 """
-
-# 1. Imprimir tablero
-# 2. Es turno de usuario: juega_usuario
-# 3. Es turno de ia: juega_ia
-# 4. Regresar a 1
-
-
 import random
 
-def imprime(tablero, simb1, simb2):
-    """
-    Imprime el tablero en la salida estándar
-    """
-    print("  0 1 2")
-    simbs = "_"+simb1+simb2
-    for i, linea in enumerate(tablero):
-        linea = [simbs[c] for c in linea]
-        linea = " ".join(linea)
-        print(i, linea)
-    print()
+class Gato:
+    def __init__(self):
+        self.tablero = [
+                [0,0,0],
+                [0,0,0],
+                [0,0,0]
+            ]
+        self.humano = 1
+        self.ia = -1
+        self.fin_de_juego = False
 
-def juega_usuario(tablero):
-    """
-    Realiza el procedimiento de una jugada de usuario
-    """
-    print("Juega usuario!")
-    val = input("Elige columna [0,1,2] ?")
-    col = int(val)
-    val = input("Elige renglón[0,1,2] ?")
-    ren = int(val)
-    print()
-    if tablero[ren][col] == 0:
-        tablero[ren][col] = 1
-        return True
-    else:
-        print("Casilla inválida!")
+    def imprime_tablero(self):
+        print()
+        print("  0 1 2")
+        for i, ren in enumerate(self.tablero):
+            print(i, " ".join([self.simbs[v] for v in ren]))
+        print()
+
+    def humano_elige(self):
+        print()
+        resp = input("Humano elige 'x' o 'o'? ")
+        if resp.lower() == 'x':
+            self.simbs = [".", "x", "o"]
+        else:
+            self.simbs = [".", "o", "x"]
+        print()
+
+    def tirada(self, p, jugador):
+        self.tablero[p[0]][p[1]] = jugador
+
+    def juega_humano(self):
+        print()
+        resp = input("Turno del humano, elige casilla (ren, col)? ")
+        p = [int(v) for v in resp.split(",")]
+        self.tirada(p, self.humano)
+        print()
+
+    def casillas_libres(self):
+        return [(i, j) for j in random.sample(range(3), 3)
+                for i in random.sample(range(3), 3)
+                if self.tablero[i][j] == 0]
+
+    def juega_ia(self):
+        print()
+        print("Turno de la IA!")
+        casillas = self.casillas_libres()
+
+        tablero_aux = [ren[:] for ren in self.tablero]
+        for c in casillas:
+            self.tirada(c, self.ia)
+            if self.gana(self.ia):
+                return
+            else:
+                self.tablero = [ren[:] for ren in tablero_aux]
+        for c in casillas:
+            self.tirada(c, self.humano)
+            if self.gana(self.humano):
+                self.tirada(c, self.ia)
+                return
+            else:
+                self.tablero = [ren[:] for ren in tablero_aux]
+
+        for c in casillas:
+            if c[0] in [0, 2] and c[1] in [0, 2]:
+                self.tirada(c, self.ia)
+                return
+
+        if (1, 1) in casillas:
+            self.tirada((1, 1), self.ia)
+            return
+
+        self.tirada(casillas[0], self.ia)
+        print()
+
+    def gana(self, jugador):
+        
+        for ren in self.tablero:
+            if sum(ren) == 3 * jugador:
+                return True
+        for col in zip(*self.tablero):
+            if sum(col) == 3 * jugador:
+                return True
+        diag1 = [ren[i] for i, ren in enumerate(self.tablero)]
+        if sum(diag1) == 3 * jugador:
+            return True
+        diag2 = [ren[2-i] for i, ren in enumerate(self.tablero)]
+        if sum(diag2) == 3 * jugador:
+            return True
+
         return False
 
-def juega_ia(tablero):
-    """
-    Realiza el procedimiento de una jugada de ia
-    """
-    jugada = False
-    print("Juega IA")
-    while not jugada:
-        col = random.randrange(3)
-        ren = random.randrange(3)
-        if tablero[ren][col] == 0:
-            tablero[ren][col] = -1
-            jugada = True
-
-def gana(tablero, n):
-    """
-    Regresa True si el jugador n ha ganado, False en caso contrario
-    """
-    # Busca gato en horizontales
-    for ren in tablero:
-        if abs(sum(ren)) == 3 and n in ren:
-            return True
-    # Busca gato en verticales
-    for col in zip(*tablero):
-        if abs(sum(col)) == 3 and n in col:
-            return True
-    # Busca gato en diagonal 1
-    diag1 = [ren[i] for i, ren in enumerate(tablero)]
-    if abs(sum(diag1)) == 3 and n in diag1:
-        return True
-    # Busca gato en diagonal 2
-    diag2 = [ren[2-i] for i, ren in enumerate(tablero)]
-    if abs(sum(diag2)) == 3 and n in diag2:
-        return True
-
-    return False
-
-def main():
-    """
-    Función principal del juego de gato
-    """
-    tablero = [
-        [0, 0, 0],
-        [0, 0, 0],
-        [0, 0, 0]
-    ]
-    turno = 0  # 0 turno de usuario, 1 turno de ia
-    fin = False  # Define cuando ha terminado el juego
-    simb1 = "o"  # Símbolo del jugador 1, de momento el usuario
-    simb2 = "x"  # Símbolo del jugador 2, de momento la IA
-
-    print()
-    print("Juego de Gato")
-    print("-"*13)
-
-    while not fin:
-        imprime(tablero, simb1, simb2)
-        if turno == 0:
-            if juega_usuario(tablero):
-                turno = 1
-                if gana(tablero, 1):
-                    print("-"*13)
-                    print("El usuario gana!")
-                    print("-"*13)
-                    fin = True
+    def imprime_resultado(self):
+        print()
+        self.imprime_tablero()
+        print()
+        if self.gana(self.humano):
+            print("El humano gana!")
+        elif self.gana(self.ia):
+            print("La IA gana!")
         else:
-            juega_ia(tablero)
-            turno = 0
-            if gana(tablero, -1):
-                fin = True
-                print("-"*13)
-                print("La IA gana!")
-                print("-"*13)
+            print("GATOOOOO!")
+        print()
 
-    imprime(tablero, simb1, simb2)
+    def es_gato(self):
+        return False if self.casillas_libres() else True
 
-if __name__ == "__main__":
-    main()
+    def run(self):
+
+        self.humano_elige()
+        turno = random.choice([self.humano, self.ia])
+        while not self.fin_de_juego and not self.es_gato():
+            self.imprime_tablero()
+            if turno == self.humano:
+                self.juega_humano()
+                if self.gana(self.humano):
+                    self.fin_de_juego = True
+                else:
+                    turno = self.ia
+            else:
+                self.juega_ia()
+                if self.gana(self.ia):
+                    self.fin_de_juego = True
+                else:
+                    turno = self.humano
+        self.imprime_resultado()
+
+
+gato = Gato()
+gato.run()
