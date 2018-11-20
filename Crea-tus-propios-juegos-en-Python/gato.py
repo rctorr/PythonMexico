@@ -23,39 +23,33 @@ son los siguientes:
     1 - Indica que es una casilla ocupada por una tirada del Humano
    -1 - Indica que es una casilla ocupara por una tirada de la IA
 """
-
 import random
-import sys
 
 class Gato:
     def __init__(self):
         self.tablero = [
-                [0, 0, 0],
-                [0, 0, 0],
-                [0, 0, 0]
+                [0,0,0],
+                [0,0,0],
+                [0,0,0]
             ]
         self.humano = 1
         self.ia = -1
         self.fin_de_juego = False
 
     def imprime_tablero(self):
-        print("-"*12)
+        print()
         print("  0 1 2")
         for i, ren in enumerate(self.tablero):
-            print(i, " ".join([self.simbs[c] for c in ren]))
-        print("-"*12)
+            print(i, " ".join([self.simbs[v] for v in ren]))
+        print()
 
     def humano_elige(self):
         print()
-        resp = input("Humano, elige 'x' o 'o'? ")
-        if resp.lower() == "x":
+        resp = input("Humano elige 'x' o 'o'? ")
+        if resp.lower() == 'x':
             self.simbs = [".", "x", "o"]
-        elif resp.lower() == "o":
-            self.simbs = [".", "o", "x"]
         else:
-            print()
-            print("Elección incorrecta, intenta de nuevo!")
-            sys.exit()
+            self.simbs = [".", "o", "x"]
         print()
 
     def tirada(self, p, jugador):
@@ -63,22 +57,19 @@ class Gato:
 
     def juega_humano(self):
         print()
-        resp = input("Es tu turno humano (ren, col)? ")
+        resp = input("Turno del humano, elige casilla (ren, col)? ")
         p = [int(v) for v in resp.split(",")]
         self.tirada(p, self.humano)
         print()
 
     def casillas_libres(self):
         return [(i, j) for j in random.sample(range(3), 3)
-                for i in random.sample(range(3),3)
+                for i in random.sample(range(3), 3)
                 if self.tablero[i][j] == 0]
 
     def juega_ia(self):
-
         print()
         print("Turno de la IA!")
-        print()
-
         casillas = self.casillas_libres()
 
         tablero_aux = [ren[:] for ren in self.tablero]
@@ -95,51 +86,56 @@ class Gato:
                 return
             else:
                 self.tablero = [ren[:] for ren in tablero_aux]
+
         for c in casillas:
-            if (c[0] in [0,2] and c[1] in [0,2]
-                and self.tablero[c[0]][c[1]] == 0):
+            if c[0] in [0, 2] and c[1] in [0, 2]:
                 self.tirada(c, self.ia)
                 return
-        if (1,1) in casillas:
-            self.tirada((1,1), self.ia)
+
+        if (1, 1) in casillas:
+            self.tirada((1, 1), self.ia)
             return
 
         self.tirada(casillas[0], self.ia)
+        print()
 
     def gana(self, jugador):
+        
         for ren in self.tablero:
             if sum(ren) == 3 * jugador:
                 return True
         for col in zip(*self.tablero):
             if sum(col) == 3 * jugador:
                 return True
-        diag1 = [self.tablero[i][i] for i in range(3)]
+        diag1 = [ren[i] for i, ren in enumerate(self.tablero)]
         if sum(diag1) == 3 * jugador:
             return True
-        diag2 = [self.tablero[2-i][i] for i in range(3)]
+        diag2 = [ren[2-i] for i, ren in enumerate(self.tablero)]
         if sum(diag2) == 3 * jugador:
             return True
+
+        return False
 
     def imprime_resultado(self):
         print()
         self.imprime_tablero()
         print()
         if self.gana(self.humano):
-            print("El humano ha ganado!")
+            print("El humano gana!")
         elif self.gana(self.ia):
-            print("La IA ha ganado!")
+            print("La IA gana!")
         else:
-            print("GATOOOO!")
+            print("GATOOOOO!")
         print()
 
-    def es_empate(self):
+    def es_gato(self):
         return False if self.casillas_libres() else True
 
     def run(self):
 
         self.humano_elige()
         turno = random.choice([self.humano, self.ia])
-        while not self.fin_de_juego and not self.es_empate():
+        while not self.fin_de_juego and not self.es_gato():
             self.imprime_tablero()
             if turno == self.humano:
                 self.juega_humano()
@@ -155,6 +151,6 @@ class Gato:
                     turno = self.humano
         self.imprime_resultado()
 
+
 gato = Gato()
 gato.run()
-
