@@ -23,14 +23,15 @@ son los siguientes:
     1 - Indica que es una casilla ocupada por una tirada del Humano
    -1 - Indica que es una casilla ocupara por una tirada de la IA
 """
+
 import random
 
 class Gato:
     def __init__(self):
         self.tablero = [
-                [0,0,0],
-                [0,0,0],
-                [0,0,0]
+                [0, 0, 0],
+                [0, 0, 0],
+                [0, 0, 0]
             ]
         self.humano = 1
         self.ia = -1
@@ -45,19 +46,19 @@ class Gato:
 
     def humano_elige(self):
         print()
-        resp = input("Humano elige 'x' o 'o'? ")
-        if resp.lower() == 'x':
+        resp = input("Elige 'x' o 'o' ? ")
+        if resp.lower() == "x":
             self.simbs = [".", "x", "o"]
         else:
             self.simbs = [".", "o", "x"]
         print()
 
-    def tirada(self, p, jugador):
-        self.tablero[p[0]][p[1]] = jugador
+    def tirada(self, p, j):
+        self.tablero[p[0]][p[1]] = j
 
     def juega_humano(self):
         print()
-        resp = input("Turno del humano, elige casilla (ren, col)? ")
+        resp = input("Turno humano (ren, col) ? ")
         p = [int(v) for v in resp.split(",")]
         self.tirada(p, self.humano)
         print()
@@ -68,89 +69,76 @@ class Gato:
                 if self.tablero[i][j] == 0]
 
     def juega_ia(self):
-        print()
-        print("Turno de la IA!")
+        print("\nTurno de la IA!\n")
         casillas = self.casillas_libres()
 
-        tablero_aux = [ren[:] for ren in self.tablero]
         for c in casillas:
             self.tirada(c, self.ia)
             if self.gana(self.ia):
                 return
             else:
-                self.tablero = [ren[:] for ren in tablero_aux]
+                self.tirada(c, 0)
         for c in casillas:
             self.tirada(c, self.humano)
             if self.gana(self.humano):
                 self.tirada(c, self.ia)
                 return
             else:
-                self.tablero = [ren[:] for ren in tablero_aux]
-
+                self.tirada(c, 0)
         for c in casillas:
             if c[0] in [0, 2] and c[1] in [0, 2]:
                 self.tirada(c, self.ia)
                 return
-
         if (1, 1) in casillas:
             self.tirada((1, 1), self.ia)
             return
 
         self.tirada(casillas[0], self.ia)
-        print()
 
-    def gana(self, jugador):
-        
+
+
+    def gana(self, j):
         for ren in self.tablero:
-            if sum(ren) == 3 * jugador:
+            if sum(ren) == 3 * j:
                 return True
         for col in zip(*self.tablero):
-            if sum(col) == 3 * jugador:
+            if sum(col) == 3 * j:
                 return True
         diag1 = [ren[i] for i, ren in enumerate(self.tablero)]
-        if sum(diag1) == 3 * jugador:
+        if sum(diag1) == 3 * j:
             return True
         diag2 = [ren[2-i] for i, ren in enumerate(self.tablero)]
-        if sum(diag2) == 3 * jugador:
+        if sum(diag2) == 3 * j:
             return True
-
-        return False
 
     def imprime_resultado(self):
         print()
         self.imprime_tablero()
         print()
         if self.gana(self.humano):
-            print("El humano gana!")
+            print("El humano ha ganado!")
         elif self.gana(self.ia):
             print("La IA gana!")
         else:
             print("GATOOOOO!")
-        print()
-
-    def es_gato(self):
-        return False if self.casillas_libres() else True
 
     def run(self):
 
         self.humano_elige()
         turno = random.choice([self.humano, self.ia])
-        while not self.fin_de_juego and not self.es_gato():
+        while not self.fin_de_juego:
             self.imprime_tablero()
             if turno == self.humano:
                 self.juega_humano()
                 if self.gana(self.humano):
                     self.fin_de_juego = True
-                else:
-                    turno = self.ia
+                turno = self.ia
             else:
                 self.juega_ia()
                 if self.gana(self.ia):
                     self.fin_de_juego = True
-                else:
-                    turno = self.humano
+                turno = self.humano
         self.imprime_resultado()
-
 
 gato = Gato()
 gato.run()
