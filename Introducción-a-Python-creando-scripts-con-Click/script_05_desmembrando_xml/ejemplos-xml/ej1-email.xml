@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<inbox>
+<email>
+  <date>2015-09-01</date>
+  <hour>08:30</hour>
+  <to>usuario@domonio.com</to>
+  <from>rictor@cuhrt.com</from>
+  <body>Este es el mensaje</body>
+</email>
+<email>
+  <date>2015-11-01</date>
+  <hour>12:30</hour>
+  <to>josecarlos@domonio.com</to>
+  <from>rictor@cuhrt.com</from>
+  <body>Este es el mensaje nuevo</body>
+</email>
+</inbox>

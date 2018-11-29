@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<MenuAlmuerzo>  
+   <Almuerzo id="almzo01">  
+      <Nombre>Huevos a la mexicana</Nombre>  
+      <Precio>$45.00</Precio>
+      <Descripcion>Huevos revueltos con jitomate, cebolla y chile
+        acompañados de frijoles y jugo o café.</Descripcion>
+      <Calorias>650</Calorias>
+   </Almuerzo>  
+   <Almuerzo id="almzo02">  
+      <Nombre>Chilaquiles con pollo</Nombre>  
+      <Precio>$55.00</Precio>
+      <Descripcion>Chilaquiles verdes con crema, queso y pollo
+        acompañados de frijoles y jugo o café.</Descripcion>
+      <Calorias>950</Calorias>
+   </Almuerzo>  
+</MenuAlmuerzo>
+
