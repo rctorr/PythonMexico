@@ -38,9 +38,9 @@ Este script genera una clave segura usando como base el alfabeto inglés en may�
 
 
 ## Presentaciones:
-[Sesión 1](presentaciones/Crea-tus-propios-comandos-en-Python-1.pdf)
-
-[Sesión 2](presentaciones/Crea-tus-propios-comandos-en-Python-2.pdf)
+- [Crea-tus-propios-comandos-en-Python-1.pdf](presentaciones/Crea-tus-propios-comandos-en-Python-1.pdf)
+- [Crea-tus-propios-comandos-en-Python-2.pdf](presentaciones/Crea-tus-propios-comandos-en-Python-2.pdf)
+- [Crea-tus-propios-comandos-en-Python-3.pdf](presentaciones/Crea-tus-propios-comandos-en-Python-3.pdf)
 
 ## El intérprete de Python
 El intérprete de Python es una gran herramienta disponible en todo momento para ejecutar pruebas de código de forma inmediata, debido a que Python es un lenguaje interpretado.
