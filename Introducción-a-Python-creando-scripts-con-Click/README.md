@@ -1,4 +1,4 @@
-# Taller: Introducción a Python creando scripts con $ Click_
+![Banner](assets/Introduccion-a-Python-creando-scripts-con-click.jpg)
 
 | Impartido por | Twitter | Telegram | Github |
 | ------------- | ------- | -------- | ------ |
@@ -31,10 +31,13 @@ Realizamos 5 versiones de este script, donde veremos desde com imprimir informac
 Acá reazamos sólo 2 versiones y es similar al script `hola.py`, pero usando el módulo [`click`](http://click.pocoo.org/5).
 
 ### [Script 3. l.py PATH](script_03_lista_archivos/)
-Este script es similar al comando `ls` de Linux o Mac o al `dir` de Windows e imprimirá en la salida estándar la lista de archivos del directorio indicado por PATH, haremos 2 versiones, en la segunda versión la salida será en formato CSV usando la opción `--to-csv.`
+Este script es similar al comando `ls` de Linux o Mac o al `dir` de Windows e imprimirá en la salida estándar la lista de archivos del directorio indicado por PATH, se incluyen varias versiones donde apulatinamente se van agregando opciones com son `--to-csv`, `--to-html` o `--to-xls`.
 
 ### [Script 4. genpass.py](script_04_genera_constrasena/)
-Este script genera una clave segura usando como base el alfabeto inglés en mayúsculas, minúsculas y digitos.
+Este script genera una o más claves seguras usando como base el alfabeto inglés en mayúsculas, minúsculas y digitos, además se puede indicar la longitud de la clave y si se desea o no incluir algunos símbolos como parte de la misma.
+
+### [Script 5. catxml.py](script_05_desmembrando_xml/)
+Este script imprime en la salida estándar en forma de árbol los nodos de cualquier xml incluyando la data y los atributos. Las distintas versiones van agregando opciones que permiten que el formato de impresión pase de texto a raw, html o filtrando nodos o atributos.
 
 
 ## Presentaciones:
