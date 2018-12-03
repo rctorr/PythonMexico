@@ -64,9 +64,12 @@ Instalando ipython:
   - Rasberry Pi 1 y 3, los script se ejecutaron usando Raspbian GNU/Linux 9 (stretch) como sistema operativo y [Berryconda](https://github.com/jjhelmus/berryconda) como distribución de Python 3.6.
   - También está disponible la imagen 8GB configurada + berryconda3 + ipython + click + scripts del repo + archivos extras para hacer funcionar los scripts:
   
-       | Imagen                | Checksum |
+       |                       | Imagen   |
        | --------------------- | -------- |
-       | [2018-12-02-raspbian-stretch-berryconda.img.xy](https://mega.nz/#!RbhmBQrS!nTaG9L5bHLSBjJ-L2EsVUTiP-WwUrZgTuFXZeVQlI78) (en Mega) | a28572669a745bab35dc8fc926e5e753bea406f14c09305691ce5be3bceeb835 |
+       | Mega                  |[2018-12-02-raspbian-stretch-berryconda.img.xy](https://mega.nz/#!RbhmBQrS!nTaG9L5bHLSBjJ-L2EsVUTiP-WwUrZgTuFXZeVQlI78) |
+       | Torrent              | [2018-12-02-raspbian-stretch-berryconda.torrent](https://github.com/rctorr/PythonMexico/raw/master/Introducci%C3%B3n-a-Python-creando-scripts-con-Click/script_05_desmembrando_xml/2018-12-02-raspbian-stretch-berryconda3.torrent)
+       | SHA256SUM            | a28572669a745bab35dc8fc926e5e753bea406f14c09305691ce5be3bceeb835 |
+       | MD5SUM               | a8c825a1b5e20c4ade6bac10e4b5ef98 |
        
   - La imagen tiene habilitado la interface ethernet con dhcp cliente, así como acceso por ssh con el usuario: pi y clave: python2018. **IMPORTANTE** Si vas a tener la rasp conectada a Internet es altamente sugerible que cambies la clave.
 
