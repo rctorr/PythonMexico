@@ -67,7 +67,8 @@ Instalando ipython:
        |                       | Imagen   |
        | --------------------- | -------- |
        | Mega                  |[2018-12-02-raspbian-stretch-berryconda.img.xy](https://mega.nz/#!RbhmBQrS!nTaG9L5bHLSBjJ-L2EsVUTiP-WwUrZgTuFXZeVQlI78) |
-       | Torrent              | [2018-12-02-raspbian-stretch-berryconda.torrent](https://github.com/rctorr/PythonMexico/raw/master/Introducci%C3%B3n-a-Python-creando-scripts-con-Click/script_05_desmembrando_xml/2018-12-02-raspbian-stretch-berryconda3.torrent)
+       | Torrent 1            | [2018-12-02-raspbian-stretch-berryconda.torrent](https://github.com/rctorr/PythonMexico/raw/master/Introducci%C3%B3n-a-Python-creando-scripts-con-Click/script_05_desmembrando_xml/2018-12-02-raspbian-stretch-berryconda3.torrent)
+       | Torrent 2            | [20181202RaspbianStretchBerryconda3_archive.torrent](https://github.com/rctorr/PythonMexico/raw/master/Introducci%C3%B3n-a-Python-creando-scripts-con-Click/script_05_desmembrando_xml/20181202RaspbianStretchBerryconda3_archive.torrent)
        | SHA256SUM            | a28572669a745bab35dc8fc926e5e753bea406f14c09305691ce5be3bceeb835 |
        | MD5SUM               | a8c825a1b5e20c4ade6bac10e4b5ef98 |
        
